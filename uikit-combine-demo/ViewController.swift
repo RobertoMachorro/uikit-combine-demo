@@ -13,12 +13,12 @@ class ViewController: UIViewController {
 	@IBOutlet weak var outputLabel: UILabel!
 	
 	@Published var currentText = ""
-	var updateSubscription: AnyCancellable?
+	var currentTextPublisher: AnyCancellable?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.updateSubscription = $currentText
+		self.currentTextPublisher = $currentText
 			.map { "Entered: \($0)" }
 			.receive(on: RunLoop.main)
 			.assign(to: \.text, on: outputLabel)
