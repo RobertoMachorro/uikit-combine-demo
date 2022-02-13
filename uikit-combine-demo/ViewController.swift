@@ -6,23 +6,30 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
 
 	@IBOutlet weak var outputLabel: UILabel!
 	@IBOutlet weak var textField: UITextField!
 
+	@Published var currentText = ""
+	var updateSubscription: AnyCancellable?
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		self.updateSubscription = $currentText.sink {
+			print("Updated text: \($0)")
+		}
 	}
 
 	@IBAction func textEditingChanged(_ sender: Any) {
-		let value = textField.text ?? "-Empty-"
-		outputLabel.text = "Entered: \(value)"
+		self.currentText = textField.text ?? "-Empty-"
 	}
 
 	@IBAction func buttonTap(_ sender: Any) {
-		outputLabel.text = "Starting over."
+		self.currentText = "Starting over."
 	}
 
 }
