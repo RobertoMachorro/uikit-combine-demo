@@ -23,6 +23,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textEditingDidEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Tvr-71-GxU"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type in some text below:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf9-Af-jFw">
                                 <rect key="frame" x="20" y="402" width="374" height="21"/>
@@ -30,17 +33,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OvR-3v-Poi">
+                                <rect key="frame" x="185.5" y="473" width="43" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Go"/>
+                                <connections>
+                                    <action selector="buttonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Xgv-yL-W4K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="OvR-3v-Poi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7gj-ac-Zsh"/>
                             <constraint firstItem="seT-ws-v1O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LYw-Yx-gnl"/>
                             <constraint firstItem="seT-ws-v1O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NJs-oH-oW8"/>
                             <constraint firstItem="seT-ws-v1O" firstAttribute="top" secondItem="wf9-Af-jFw" secondAttribute="bottom" constant="8" symbolic="YES" id="es7-yy-fVg"/>
                             <constraint firstItem="wf9-Af-jFw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="fhG-eT-AFB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wf9-Af-jFw" secondAttribute="trailing" constant="20" id="qIb-4d-F6m"/>
+                            <constraint firstItem="OvR-3v-Poi" firstAttribute="top" secondItem="seT-ws-v1O" secondAttribute="bottom" constant="8" symbolic="YES" id="rPa-t2-zyG"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="outputLabel" destination="wf9-Af-jFw" id="SSZ-n1-wYr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
