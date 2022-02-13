@@ -29,9 +29,5 @@ class ViewController: UIViewController {
 			self.currentText = textField.text ?? "-Empty-"
 		}
 	}
-
-	@IBAction func buttonTap(_ sender: Any) {
-		self.currentText = "Starting over."
-	}
 	
 }
