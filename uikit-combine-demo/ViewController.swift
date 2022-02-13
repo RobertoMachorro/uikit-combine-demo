@@ -11,7 +11,6 @@ import Combine
 class ViewController: UIViewController {
 	
 	@IBOutlet weak var outputLabel: UILabel!
-	@IBOutlet weak var textField: UITextField!
 	
 	@Published var currentText = ""
 	var updateSubscription: AnyCancellable?
@@ -26,9 +25,11 @@ class ViewController: UIViewController {
 	}
 	
 	@IBAction func textEditingChanged(_ sender: Any) {
-		self.currentText = textField.text ?? "-Empty-"
+		if let textField = sender as? UITextField {
+			self.currentText = textField.text ?? "-Empty-"
+		}
 	}
-	
+
 	@IBAction func buttonTap(_ sender: Any) {
 		self.currentText = "Starting over."
 	}
