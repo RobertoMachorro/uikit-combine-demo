@@ -14,12 +14,16 @@ class ViewController: UIViewController {
 	
 	@Published var currentText = ""
 	var currentTextPublisher: AnyCancellable?
-	
+
+	var logging = PassthroughSubject<String, Never>()
+
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+
 		self.currentTextPublisher = $currentText
-			.map { "Entered: \($0)" }
+			.map { text in
+				return text=="" ? "Please enter something below:" : "Entered: \(text)"
+			}
 			.receive(on: RunLoop.main)
 			.assign(to: \.text, on: outputLabel)
 	}
