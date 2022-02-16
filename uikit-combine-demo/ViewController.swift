@@ -13,10 +13,7 @@ class ViewController: UIViewController {
 	@IBOutlet weak var outputLabel: UILabel!
 	@IBOutlet weak var inputField: UITextField!
 	
-	@Published var currentText = ""
 	var currentTextPublisher: AnyCancellable?
-
-	var logging = PassthroughSubject<String, Never>()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
