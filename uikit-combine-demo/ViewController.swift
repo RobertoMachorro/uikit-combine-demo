@@ -11,6 +11,7 @@ import Combine
 class ViewController: UIViewController {
 	
 	@IBOutlet weak var outputLabel: UILabel!
+	@IBOutlet weak var inputField: UITextField!
 	
 	@Published var currentText = ""
 	var currentTextPublisher: AnyCancellable?
@@ -20,18 +21,12 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.currentTextPublisher = $currentText
-			.map { text in
-				return text=="" ? "Please enter something below:" : "Entered: \(text)"
+		self.currentTextPublisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: inputField)
+			.sink { notification in
+				if let inputField = notification.object as? UITextField {
+					print("Value=\(inputField.text ?? "")")
+				}
 			}
-			.receive(on: RunLoop.main)
-			.assign(to: \.text, on: outputLabel)
-	}
-	
-	@IBAction func textEditingChanged(_ sender: Any) {
-		if let textField = sender as? UITextField {
-			self.currentText = textField.text ?? "-Empty-"
-		}
 	}
 	
 }
