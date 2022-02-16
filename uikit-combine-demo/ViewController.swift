@@ -21,6 +21,7 @@ class ViewController: UIViewController {
 		self.currentTextPublisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: inputField)
 			.compactMap { ($0.object as? UITextField)?.text }
 			.debounce(for: .milliseconds(500), scheduler: RunLoop.main)
+			// .filter { $0 != "" }
 			.map { text in
 				return text=="" ? "Please enter something below:" : "Entered: \(text)"
 			}
