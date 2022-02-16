@@ -22,11 +22,14 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 
 		self.currentTextPublisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: inputField)
-			.sink { notification in
-				if let inputField = notification.object as? UITextField {
-					print("Value=\(inputField.text ?? "")")
-				}
+			.map { notification in
+				(notification.object as! UITextField).text ?? ""
 			}
+			.map { text in
+				return text=="" ? "Please enter something below:" : "Entered: \(text)"
+			}
+			.receive(on: RunLoop.main)
+			.assign(to: \.text, on: outputLabel)
 	}
 	
 }
