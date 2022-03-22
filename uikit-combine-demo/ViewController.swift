@@ -21,12 +21,19 @@ class ViewController: UIViewController {
 		self.currentTextPublisher = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: inputField)
 			.compactMap { ($0.object as? UITextField)?.text }
 			.debounce(for: .milliseconds(500), scheduler: RunLoop.main)
-			// .filter { $0 != "" }
 			.map { text in
 				return text=="" ? "Please enter something below:" : "Entered: \(text)"
 			}
+			.print()
 			.receive(on: RunLoop.main)
-			.assign(to: \.text, on: outputLabel)
+			.sink(receiveValue: { text in
+				let action = UIAlertAction(title: "OK", style: .default)
+				let alert = UIAlertController(title: "Keystrokes", message: text, preferredStyle: .alert)
+				alert.addAction(action)
+				self.present(alert, animated: true)
+
+				self.outputLabel.text = text
+			})
 	}
-	
+
 }
