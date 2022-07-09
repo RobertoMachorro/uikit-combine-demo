@@ -12,8 +12,9 @@ class ViewController: UIViewController {
 	
 	@IBOutlet weak var outputLabel: UILabel!
 	@IBOutlet weak var inputField: UITextField!
-	
+
 	var currentTextPublisher: AnyCancellable?
+	var currentButtonPublisher: AnyCancellable?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
